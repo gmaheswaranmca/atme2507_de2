@@ -1,0 +1,8 @@
+prod_id,prod_name,price,launch_date,supplier_id
+P001,Laptop,1200,2022-03-15,S001
+P002,Smartphone,800,2021-11-10,S002
+P003,Tablet,600,2023-01-05,S001
+P004,Monitor,300,2022-07-20,S003
+P005,Printer,,2022-09-12,S002
+P006,Keyboard,50,2021-05-30,S003
+P007,Mouse,25,2023-02-18,S001

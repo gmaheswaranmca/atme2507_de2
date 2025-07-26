@@ -1,0 +1,5 @@
+supplier_id,supplier_name,country,contact
+S001,Supplier A,USA,alice@example.com
+S002,Supplier B,India,
+S003,Supplier C,Germany,bob@example.com
+S004,Supplier D,USA,charlie@example.com
