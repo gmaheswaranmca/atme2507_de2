@@ -1,0 +1,11 @@
+Base URL : https://jsonplaceholder.typicode.com
+    GET                                            /todos      - read all todos 
+    GET                                            /todos/4    - read by id = 4
+    POST                                           /todos      - insert / add a todo
+    {"userId":1,"title":"Learning DE","completed":false}    
+    PUT                                            /todos/4    - update by id 
+    {"userId":1,"title":"changed title","completed":true}
+    DELETE                                         /ptodos/4    - delete by id  
+
+
+GET https://api.openweathermap.org/data/2.5/weather?q=London&appid=39be8355f4c2b070862ba7ea33d969fa

@@ -1,0 +1,8 @@
+patient_id,patient_name,age,gender,city
+P001,John Doe,35,M,Chennai
+P002,Jane Smith,28,F,Bangalore
+P003,Arun Kumar,42,M,Hyderabad
+P004,Meena Iyer,30,F,Chennai
+P005,Ravi Patel,50,M,Mumbai
+P006,Anita Desai,25,F,Bangalore
+P007,Sunil Rao,38,M,Hyderabad

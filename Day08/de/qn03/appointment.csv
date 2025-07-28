@@ -1,0 +1,9 @@
+appointment_id,patient_id,doctor,appointment_date,department,status
+A001,P001,Dr. Rao,2023-07-10,Cardiology,Completed
+A002,P002,Dr. Mehta,2023-07-12,Neurology,Cancelled
+A003,P003,Dr. Singh,2023-07-15,Orthopedics,Completed
+A004,P001,Dr. Rao,2023-08-01,Cardiology,Pending
+A005,P004,Dr. Gupta,2023-07-20,Dermatology,Completed
+A006,P005,Dr. Mehta,2023-07-22,Neurology,Completed
+A007,P006,Dr. Singh,2023-08-02,Orthopedics,Pending
+A008,P007,Dr. Gupta,2023-08-05,Dermatology,Completed
