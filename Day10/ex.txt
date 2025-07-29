@@ -1,0 +1,27 @@
+1. mongosh ...
+test>
+2. test>        use todos_db 
+todos_db> 
+3. todos_db>    show dbs 
+# no dbs 
+4. todos_db>    show collections
+# no collections 
+5. todos_db>    db.todos.insertOne({userId: 1, title: 'title 1', completed: false})  
+{
+  acknowledged: true,
+  insertedId: ObjectId('68879dfc170bc25ba9eec4a9')
+}
+6. todos_db>    db.todos.find()
+7. todos_db>    db.todos.insertMany([{userId:1, title: 'title 2', completed: false}, 
+    {userId:2, title:'title 3', completed:false}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('68879f59170bc25ba9eec4aa'),
+    '1': ObjectId('68879f59170bc25ba9eec4ab')
+  }
+}
+8. todos_db>    db.todos.find()
+9. todos_db>    show dbs 
+10. todos_db>   show collections
+11. todos_db>   exit
