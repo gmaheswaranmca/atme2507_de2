@@ -1,0 +1,96 @@
+Create the documents for "emps" and "depts" collections for below csv data: 
+```emp.csv 
+emp_id,name,department,city,salary,join_date,performance_score
+101,Alice,IT,New York,72000,2019-06-15,88
+102,Bob,HR,Boston,58000,2020-08-01,77
+103,Charlie,Finance,Chicago,67000,2018-01-10,91
+104,David,IT,Boston,75000,2017-03-25,85
+105,Eve,Finance,New York,69000,2021-07-11,92
+106,Frank,IT,Chicago,,2019-11-04,80
+107,Grace,Marketing,San Francisco,61000,2020-12-23,84
+108,Heidi,IT,San Francisco,74000,2016-10-18,88
+109,Ivy,Marketing,Boston,60000,2018-05-29,76
+110,John,HR,New York,59000,2021-03-13,79
+111,Kate,Finance,Chicago,73000,2019-02-20,89
+112,Leo,IT,Boston,77000,2022-01-01,95
+113,Mike,Marketing,New York,61000,2017-09-15,82
+114,Nina,HR,San Francisco,62000,2016-06-22,80
+115,Owen,Finance,Chicago,68000,2018-12-19,73
+116,Paul,IT,New York,76000,2021-10-05,90
+117,Quinn,Marketing,Boston,,2019-05-30,85
+118,Rachel,Finance,San Francisco,71000,2020-04-17,88
+119,Steve,HR,Chicago,60000,2021-02-10,81
+120,Tina,IT,San Francisco,72000,2018-08-28,87
+```
+and 
+```dept.csv
+department,manager
+IT,Aaron
+Finance,Bruce
+HR,Clara
+Marketing,Derek 
+```
+
+```mongo emps and depts collections 
+db.emps.insertMany([
+    { emp_id: 101, name: "Alice", department: "IT", city: "New York", salary: 72000, join_date: ISODate("2019-06-15"), performance_score: 88 },
+    { emp_id: 102, name: "Bob", department: "HR", city: "Boston", salary: 58000, join_date: ISODate("2020-08-01"), performance_score: 77 },
+    { emp_id: 103, name: "Charlie", department: "Finance", city: "Chicago", salary: 67000, join_date: ISODate("2018-01-10"), performance_score: 91 },
+    { emp_id: 104, name: "David", department: "IT", city: "Boston", salary: 75000, join_date: ISODate("2017-03-25"), performance_score: 85 },
+    { emp_id: 105, name: "Eve", department: "Finance", city: "New York", salary: 69000, join_date: ISODate("2021-07-11"), performance_score: 92 },
+    { emp_id: 106, name: "Frank", department: "IT", city: "Chicago", salary: null, join_date: ISODate("2019-11-04"), performance_score: 80 },
+    { emp_id: 107, name: "Grace", department: "Marketing", city: "San Francisco", salary: 61000, join_date: ISODate("2020-12-23"), performance_score: 84 },
+    { emp_id: 108, name: "Heidi", department: "IT", city: "San Francisco", salary: 74000, join_date: ISODate("2016-10-18"), performance_score: 88 },
+    { emp_id: 109, name: "Ivy", department: "Marketing", city: "Boston", salary: 60000, join_date: ISODate("2018-05-29"), performance_score: 76 },
+    { emp_id: 110, name: "John", department: "HR", city: "New York", salary: 59000, join_date: ISODate("2021-03-13"), performance_score: 79 },
+    { emp_id: 111, name: "Kate", department: "Finance", city: "Chicago", salary: 73000, join_date: ISODate("2019-02-20"), performance_score: 89 },
+    { emp_id: 112, name: "Leo", department: "IT", city: "Boston", salary: 77000, join_date: ISODate("2022-01-01"), performance_score: 95 },
+    { emp_id: 113, name: "Mike", department: "Marketing", city: "New York", salary: 61000, join_date: ISODate("2017-09-15"), performance_score: 82 },
+    { emp_id: 114, name: "Nina", department: "HR", city: "San Francisco", salary: 62000, join_date: ISODate("2016-06-22"), performance_score: 80 },
+    { emp_id: 115, name: "Owen", department: "Finance", city: "Chicago", salary: 68000, join_date: ISODate("2018-12-19"), performance_score: 73 },
+    { emp_id: 116, name: "Paul", department: "IT", city: "New York", salary: 76000, join_date: ISODate("2021-10-05"), performance_score: 90 },
+    { emp_id: 117, name: "Quinn", department: "Marketing", city: "Boston", salary: null, join_date: ISODate("2019-05-30"), performance_score: 85 },
+    { emp_id: 118, name: "Rachel", department: "Finance", city: "San Francisco", salary: 71000, join_date: ISODate("2020-04-17"), performance_score: 88 },
+    { emp_id: 119, name: "Steve", department: "HR", city: "Chicago", salary: 60000, join_date: ISODate("2021-02-10"), performance_score: 81 },
+    { emp_id: 120, name: "Tina", department: "IT", city: "San Francisco", salary: 72000, join_date: ISODate("2018-08-28"), performance_score: 87 }
+]);
+
+db.depts.insertMany([
+    { department: "IT", manager: "Aaron" },
+    { department: "Finance", manager: "Bruce" },
+    { department: "HR", manager: "Clara" },
+    { department: "Marketing", manager: "Derek" }
+]);
+```
+
+🧹 Data Cleaning & Preprocessing
+1. Filter rows where the `salary` is missing.
+2. Fill the missing values in the `salary` column with the average salary.
+3. Create new columns `join_year` and `join_month` from the `join_date` column.
+
+---
+
+🔍 Filtering & Conditional Selection
+
+4. Select all employees from the `IT` department earning more than 50000.
+5. Retrieve all employees who joined before `2017-01-01`.
+6. Get the top 5 employees with the highest `performance_score`.
+7. List all employees from `Boston` in the `Marketing` department.
+
+---
+
+📊 Aggregation & GroupBy
+
+8. Find the average salary by each department.
+9. Count the number of employees in each city.
+10. Find the maximum performance score in each department.
+11. Calculate the total salary paid to employees in the `Finance` department.
+12. Find the number of employees who joined each year.
+
+---
+
+🔗 Joins (Assume departments.csv is available)
+
+13. Join the employee dataset with `departments.csv` on the `department` column using a left join.
+14. After joining, display employees along with their respective managers.
+15. List employees whose manager is `Clara`.
