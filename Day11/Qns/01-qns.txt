@@ -66,31 +66,73 @@ db.depts.insertMany([
 🧹 Data Cleaning & Preprocessing
 1. Filter rows where the `salary` is missing.
 2. Fill the missing values in the `salary` column with the average salary.
-3. Create new columns `join_year` and `join_month` from the `join_date` column.
+var avgSal = db.emps.aggregate([
+    {$match: { salary: {$ne:null} } },
+    {$group: {_id:null, avg:{$avg:"$salary"} } }
+    ]).toArray()[0].avg;
+db.emps.updateMany({salary:null},{$set:{salary:avgSal}})
+db.emps.find({salary:null})
+db.emps.find()
 
+3. Create new columns `join_year` and `join_month` from the `join_date` column.
+db.emps.aggregate([{$project:{name:1,join_date:1,year:{$year:"$join_date"}}}])
+
+db.emps.updateMany({},[{$set:{ "join_year":{$year:"$join_date"} }}])
+db.emps.updateMany({},[{$set:{ "join_month":{$month:"$join_date"} }}])
 ---
 
 🔍 Filtering & Conditional Selection
 
 4. Select all employees from the `IT` department earning more than 50000.
+$ db.emps.find({department:'IT', salary:{ $gt: 50000 } } )
 5. Retrieve all employees who joined before `2017-01-01`.
+$ db.emps.find({join_date : {$lt: ISODate('2017-01-01')}})
 6. Get the top 5 employees with the highest `performance_score`.
+$ db.emps.find().sort({'performance_score':-1}).limit(5)
 7. List all employees from `Boston` in the `Marketing` department.
+$ db.emps.find({city:'Boston', department:'Marketing'})
 
 ---
 
 📊 Aggregation & GroupBy
 
 8. Find the average salary by each department.
+$ db.emps.aggregate([{$group : {_id:'$department',avgSal:{$avg:"$salary"}}}])
 9. Count the number of employees in each city.
+$ db.emps.aggregate([{$group : {_id:'$city',avgSal:{$sum:1}}}])
 10. Find the maximum performance score in each department.
+$ db.emps.aggregate([{$group : {_id:'$department',maxPS:{$max:"$performance_score"}}}])
 11. Calculate the total salary paid to employees in the `Finance` department.
+$ db.emps.aggregate([{$match:{department:'Finance'}}, {$group:{_id:null,totSal:{$sum:"$salary"}}}])
 12. Find the number of employees who joined each year.
-
+$ db.emps.aggregate([{$group:{_id:{$year:'$join_date'},empCount:{$sum:1}}},
+{$sort:{_id:1}}])
 ---
 
 🔗 Joins (Assume departments.csv is available)
 
 13. Join the employee dataset with `departments.csv` on the `department` column using a left join.
+$ db.emps.aggregate([{$lookup:{from:'depts',localField:'department', foreignField:'department',as:'dept'}}])
 14. After joining, display employees along with their respective managers.
+$ db.emps.aggregate([{$lookup:{from:'depts',localField:'department', foreignField:'department',as:'dept'}}])
+$ db.emps.aggregate([{$lookup:{from:'depts',localField:'department', foreignField:'department',as:'dept'}},{$unwind:'$dept'}])
 15. List employees whose manager is `Clara`.
+db.emps.aggregate([{$lookup:{from:'depts',localField:'department', foreignField:'department',as:'dept'}},{$unwind:'$dept'},{$match:{'dept.manager':'Clara'}}])
+
+
+
+
+
+
+
+
+
+
+
+
+from pymongo import MongoClient
+client = MongoClient('mongodb+srv://mahesh:12345@cluster0.wkvfjw4.mongodb.net')
+db = client['todos_app_db']
+collection = db['emps']
+print(list(collection.find({})))
+
